@@ -1,118 +1,144 @@
 // link to page creation
 const generateHTML = require('./src/generateHTML');
 
+
 // node modules & packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 
 
-const employee = require('./lib/Employee');
-
-// team profiles
-const { manager } = require('./lib/Manager');
-const { engineer } = require('./lib/Engineer');
-const { intern } = require('./lib/Intern');
+// team profiles js files
+const manager = require('./lib/Manager');
+const engineer = require('./lib/Engineer');
+const intern = require('./lib/Intern');
 
 
-//Role question
-const roleQuestion = () => {
-    return inquirer.prompt ([
-        { 
-            //list options for Role to be selected
-            type: 'list',
-            message: 'Select the employee role.',
-            name: 'role',
-            choices: [
-                { value: 'Manager' },   //manager role
-                { value: 'Engineer' },  //engineer role
-                { value: 'Intern' },  //intern role
-            ]
-        }
-    ])
-};
+//Team array
+const teamArray = [];
 
-// Manager questions for user input
-const managerQuestions = () => {
+
+//Manager prompts array
+const managerPrompts = () => {
     return inquirer.prompt ([
         {
             type: 'input',
-            message: 'Team Manager name: ',
             name: 'name',
+            message: "Please enter the team manger's name:"   
         },
         {
             type: 'input',
-            message: 'Team Manager ID: ',
             name: 'id',
+            message: "What is the manager's employee ID?"
         },
         {
             type: 'input',
-            message: 'Team Manager email: ',
-            name: 'Email',
+            name: 'email',
+            message: "What is the manager's email address:"
         },
         {
             type: 'input',
-            message: 'Office Number: ',
             name: 'officeNumber',
-        }
+            message: "What is the manager's office number?"
+        },
     ])
-    //promise to add manager information
-    .then(managerAdd => {
-        const  { name, id, email, officeNumber } = managerAdd; 
+    .then(managerInput => {
+        const {name, id, email, officeNumber} = managerInput;
         const manager = new Manager (name, id, email, officeNumber);
 
-        //log manager information
-        console.log(manager); 
+        teamArray.push(manager);
+        console.log(manager);
     })
 };
 
-// Engineer questions for user input
-const engineerQuestions = () => {
+const otherEmployeePrompts = () => {
     return inquirer.prompt ([
         {
+            type: 'list',
+            name: 'role',
+            message: "What is this employee's role on the team?",
+            choices: ['Engineer', 'Intern']
+        },
+        {
             type: 'input',
-            message: 'Team Engineer name: ',
             name: 'name',
+            message: "What is this employee's name?"
         },
         {
             type: 'input',
-            message: 'Team Engineer ID: ',
             name: 'id',
+            message: "What is this employee's ID?"
         },
         {
             type: 'input',
-            message: 'Team Engineer email: ',
-            name: 'Email',
+            name: 'email',
+            message: "What is this employee's email address?"
         },
         {
             type: 'input',
-            message: 'Team Engineer GitHub Username: ',
             name: 'github',
-        }
+            message: "What is this engineer's GitHub username?",
+            when: (input) => input.role === "Engineer"
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: "What school does this intern attend?",
+            when: (input) => input.role === "Intern"
+        },
+        {
+            type: 'confirm',
+            name: 'continueAdding',
+            message: "Would you like to add more team members?",
+            default: false
+        },
     ])
+    .then(employeeInput => {
+        //Handling different employee types
+        let {name, id, email, role, github, school, continueAdding} = employeeInput
+        let employee;
+
+        if (role === "Engineer") {
+            employee = new Engineer (name, id, email, github);
+            console.log(employee);
+        }
+        else {
+            employee = new Intern (name, id, email, school);
+            console.log(employee);
+        }
+
+        teamArray.push(employee);
+
+        if (continueAdding) {
+            return otherEmployeePrompts(teamArray);
+        }
+        else {
+            return teamArray;
+        }
+    })
 };
 
-// Intern questions for user input
-const internQuestions = () => {
-    return inquirer.prompt ([
-        {
-            type: 'input',
-            message: 'Inter name: ',
-            name: 'name',
-        },
-        {
-            type: 'input',
-            message: 'Inter ID: ',
-            name: 'id',
-        },
-        {
-            type: 'input',
-            message: 'Inter email: ',
-            name: 'Email',
-        },
-        {
-            type: 'input',
-            message: 'Intern current school: ',
-            name: 'school',
+//Function to generate HTML file
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        //Error 
+        if (err) {
+            console.log(err);
+            return;
+        //Success 
+        } else {
+            console.log('You have successfully generated your team profile!')
         }
-    ])
-};
+    })
+}; 
+
+managerPrompts()
+  .then(otherEmployeePrompts)
+  .then(teamArray => {
+    return generateHTML(teamArray);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .catch(err => {
+ console.log(err);
+  });
