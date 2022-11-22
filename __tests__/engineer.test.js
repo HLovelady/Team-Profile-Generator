@@ -1,39 +1,22 @@
+// using Engineer constructor 
 const Engineer = require('../lib/Engineer');
 
-//testing the engineer.js file making sure there are no errors
-describe("Engineer", () => {
-    it("should return the name passed into the function", () => {
-        //Arrange
-        const newEmp = new Engineer("Jessica", "2", "Jessica@examplecompany.org", "jessgit");
-        const testName = newEmp.getName();
-        expect(testName).toBe("Jessica");
-    });
+// creating engineer object  
+test('creates an Engineer object', () => {
+    const engineer = new Engineer('Ronnie', 28, 'ronnie@gmail', 'ronniecodes99');
+    expect(engineer.github) .toEqual(expect.any(String));
+});
 
-    it("should return the ID passed into the function", () => {
-        const newEmp = new Engineer("Jessica", "2", "Jessica@examplecompany.org", "jessgit");
-        const testId = newEmp.getId();
-    
-        expect(testId).toBe("2");
-    });
-    
-    it("should return the email passed into the function", () => {
-        const newEmp = new Engineer("Jessica", "2", "Jessica@examplecompany.org", "jessgit");
-        const testEmail = newEmp.getEmail();
-    
-        expect(testEmail).toBe("Jessica@examplecompany.org");
-    });
+// gets github from getGithub()
+test('gets engineer github value', () => {
+    const engineer = new Engineer('Ronnie', 28, 'ronnie@gmail', 'ronniecodes99');
 
-    it("should return the github username passed into the function", () => {
-        const newEmp = new Engineer("Jessica", "2", "Jessica@examplecompany.org", "jessgit");
-        const testGithub = newEmp.getGithub();
+    expect(engineer.getGithub()).toEqual(expect.stringContaining(engineer.github.toString()));
+});
 
-        expect(testGithub).toBe("jessgit");
-    });
-    
-    it("should return the role passed into the function", () => {
-        const newEmp = new Engineer("Jessica", "2", "Jessica@examplecompany.org", "jessgit");
-        const testRole = newEmp.getRole();
-    
-        expect(testRole).toBe("Engineer");
-    });
+// gets role from getRole() 
+test('gets role of employee', () => {
+    const engineer = new Engineer('Ronnie', 28, 'ronnie@gmail', 'ronniecodes99');
+
+    expect(engineer.getRole()).toEqual("Engineer");
 });
