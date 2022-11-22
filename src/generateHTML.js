@@ -1,7 +1,7 @@
 //Manager card
 const generateManager = function (manager) {
-    return `
-    <div class="col-4 mb-4">
+  return `
+    <div class="col mb-4">
         <div class="card h-100">
             <div class="card-header">
                 <h3>${manager.name}</h3>
@@ -19,8 +19,8 @@ const generateManager = function (manager) {
 
 //Engineer card
 const generateEngineer = function (engineer) {
-    return `
-    <div class="col-4 mb-4">
+  return `
+    <div class="col mb-4">
         <div class="card h-100">
             <div class="card-header">
                 <h3>${engineer.name}</h3>
@@ -38,8 +38,8 @@ const generateEngineer = function (engineer) {
 
 //Intern card
 const generateIntern = function (intern) {
-    return `
-    <div class="col-4 mb-4">
+  return `
+    <div class="col mb-4">
         <div class="card h-100">
             <div class="card-header">
                 <h3>${intern.name}</h3>
@@ -55,44 +55,44 @@ const generateIntern = function (intern) {
     `;
 };
 
-//Handle user input and push data to page with appropriate card 
+//Handle user input and push data to page with appropriate card
 generateHTML = (data) => {
+  //Cards array
+  pageArray = [];
 
-    //Cards array 
-    pageArray = []; 
+  for (let i = 0; i < data.length; i++) {
+    const employee = data[i];
+    const role = employee.getRole();
 
-    for (let i = 0; i < data.length; i++) {
-        const employee = data[i];
-        const role = employee.getRole(); 
+    if (role === "Manager") {
+      const managerCard = generateManager(employee);
 
-        if (role === 'Manager') {
-            const managerCard = generateManager(employee);
-
-            pageArray.push(managerCard);
-        }
-        if (role === 'Engineer') {
-            const engineerCard = generateEngineer(employee);
-
-            pageArray.push(engineerCard);
-        }
-        if (role === 'Intern') {
-            const internCard = generateIntern(employee);
-
-            pageArray.push(internCard);
-        }
+      pageArray.push(managerCard);
     }
-    
-    //Join strings
-    const employeeCards = pageArray.join('')
+    if (role === "Engineer") {
+      const engineerCard = generateEngineer(employee);
 
-    //Return to generated page
-    const generateTeam = generateTeamPage(employeeCards); 
-    return generateTeam;
+      pageArray.push(engineerCard);
+    }
+    if (role === "Intern") {
+      const internCard = generateIntern(employee);
+
+      pageArray.push(internCard);
+    }
+  }
+  console.log("PAGE ARRAY ", pageArray);
+  //Join strings
+  const employeeCards = pageArray.join("");
+
+  console.log("EMPLOYEE CARDS ", employeeCards);
+  //Return to generated page
+  const generateTeam = generateTeamPage(employeeCards);
+  return generateTeam;
 };
 
-//Generate HTML page 
-const generateTeamPage = function (employeeCards) {   
-    return`
+//Generate HTML page
+const generateTeamPage = function (employeeCards) {
+  return `
     <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -107,10 +107,10 @@ const generateTeamPage = function (employeeCards) {
       <link rel="stylesheet" href="style.css">
   </head>
   
-  <body>
+  <body class="bg-dark">
       <header>
           <nav class="navbar" id="navbar">
-              <span class="navbar-brand mb-0 h1 w-100 text-center" id="navbar-text">The Main Team</span>
+              <span class="navbar-brand mb-0 h1 w-100 text-center" id="navbar-text">The Dream Team</span>
           </nav>
       </header>
       <main>
@@ -126,6 +126,6 @@ const generateTeamPage = function (employeeCards) {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </html>
 `;
-}
+};
 
-module.exports = generateHTML; 
+module.exports = generateHTML;
