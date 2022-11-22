@@ -4,18 +4,20 @@
 
 :root {
     --lightpurple: #9799CA;
-    --darkgrey: #4C4E52;
+    --darkgrey: #4e5054;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
 }
 
 #navbar {
-    font-family: 'Snell Roundhand', sans-serif;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
     background-color: var(--darkgrey);
     color: var(--lightpurple);
     font-size: 50px;
+    font-weight: bolder;
 }
 
 .navbar-brand {
@@ -23,13 +25,14 @@ body {
 }
 
 .card {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.40) 0px 5px 15px;
 }
 
 .card-header {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: var(--lightpurple);
     color: var(--darkgrey);
+    font-weight: bolder;
 }
 
 .card-body {
