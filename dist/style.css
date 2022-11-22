@@ -4,12 +4,14 @@
 
 :root {
     --lightpurple: #9799CA;
-    --darkgrey: #4e5054;
+    --darkpurple: #727395;
+    --whitepurple: #d1d2e7;
+    --darkgrey: #55575c;
 }
 
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
+    /*font-weight: bolder;*/
 }
 
 #navbar {
@@ -36,8 +38,10 @@ body {
 }
 
 .card-body {
-    background-color: white;
-    color: var(--lightpurple);
+    background-color: var(--whitepurple);
+    color: var(--darkpurple);
+    font-size: 20px;
+    font-weight: 400;
     
 }
 
