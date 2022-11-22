@@ -3,11 +3,8 @@ const Intern = require('../lib/Intern');
 //testing the intern.js file making sure there are no errors
 describe("Intern", () => {
     it("should return the name passed into function", () => {
-        //Arrange
         const newEmp = new Intern("Kyle", "4", "kyle@examplecompany.org", "University of Texas at Austin");
-        //Act
         const testName = newEmp.getName();
-        //Assert
         expect(testName).toBe("Kyle");
     });
 

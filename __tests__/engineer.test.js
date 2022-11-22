@@ -2,12 +2,10 @@ const Engineer = require('../lib/Engineer');
 
 //testing the engineer.js file making sure there are no errors
 describe("Engineer", () => {
-    it("should return the name passed in to the function", () => {
+    it("should return the name passed into the function", () => {
         //Arrange
         const newEmp = new Engineer("Jessica", "2", "Jessica@examplecompany.org", "jessgit");
-        //Act
         const testName = newEmp.getName();
-        //Assert
         expect(testName).toBe("Jessica");
     });
 

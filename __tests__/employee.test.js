@@ -3,11 +3,8 @@ const Employee = require('../lib/Employee');
 //testing the employee.js file making sure there are no errors
 describe("Employee", () => {
     it("should return the name passed into the function", () => {
-        //Arrange
         const newEmp = new Employee("Sydney", "5", "sydney@examplecompany.org");
-        //Act
         const testName = newEmp.getName();
-        //Assert
         expect(testName).toBe("Sydney");
     });
     it("should return the ID passed into the function", () => {
