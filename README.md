@@ -18,6 +18,9 @@ Fork and clone this Github repo. Install Node.js Version Manager (nvm) locally a
 In your integrated terminal in VS Code, open index.js. Run the command "node index.js". Type your responses to the given prompts. Once completed, the application with generate the HTML  that can be used for your webpage.
 
 
+![Screen Shot 2022-11-21 at 11 35 42 PM](https://user-images.githubusercontent.com/97558337/203232811-e0ae518b-a6ba-4f97-a7b6-2aaa0b522c80.png)
+
+
 
 https://user-images.githubusercontent.com/97558337/203229352-a3ceb574-2000-407c-ac69-d89602a945b5.mp4
 
